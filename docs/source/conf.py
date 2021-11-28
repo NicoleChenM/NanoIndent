@@ -13,11 +13,16 @@
 
 import os
 import sys
-import pygame
-from pygame.locals import *
-from mock import Mock
-sys.modules['pygame'] = Mock()
-sys.modules['pygame.constants'] = Mock()
+########### TRICK FOUND ON SOME TUTORIAL : ADD IN THE MOCK_MODULES ANY EXTERNAL MODULE YOU'RE USING IN YOUR PACKAGE.
+
+import mock
+
+MOCK_MODULES = ['numpy', 'math', 'io', 'lmfit', 're', 'os', 'traceback', 'pandas', 'zipfile',
+                'scipy', 'sklearn', 'matplotlib', 'matplotlib.pyplot', 'enum', 'scipy.optimize',
+                'scipy.interpolate', 'scipy.signal', 'scipy.special', '__future__', 'toolboxutilities']
+for mod_name in MOCK_MODULES:
+    sys.modules[mod_name] = mock.Mock()
+
 sys.path.insert(0, os.path.abspath('../../nanoIndent'))
 
 
